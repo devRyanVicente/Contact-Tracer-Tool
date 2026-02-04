@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Contact Tracer Tool",
+  "version": "0.0.1",
+  "description": "Coleta emails/telefones/redes; deep scan em links internos do mesmo domínio.",
+  "permissions": ["activeTab", "tabs", "storage"],
+  "host_permissions": ["<all_urls>", "https://rdap.org/*"],
+  "background": { "service_worker": "service_worker.js" },
+  "action": { "default_title": "Ativar/Desativar painel nesta aba"},
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*.svg"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
