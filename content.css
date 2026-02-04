@@ -1,0 +1,391 @@
+/* Painel flutuante in-page */
+#auditx-panel {
+  position: fixed;
+  top: 90px;
+  right: 18px;
+  width: 360px;
+  max-height: 72vh;
+  background: #101114;
+  color: #e9e9ea;
+  z-index: 2147483647;
+  border-radius: 12px;
+  box-shadow: 0 10px 35px rgba(0,0,0,.45);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow: hidden;
+  display: none;
+}
+
+#auditx-panel * { box-sizing: border-box; }
+
+#auditx-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 10px;
+  cursor: move;
+  background: linear-gradient(180deg, #171922, #11121a);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+#auditx-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.auditx-btn {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: #e9e9ea;
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.auditx-btn:hover { background: rgba(255,255,255,.10); }
+
+#auditx-body {
+  padding: 10px;
+  overflow: auto;
+  max-height: calc(72vh - 48px);
+}
+
+.auditx-card {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.auditx-label {
+  font-size: 11px;
+  opacity: .75;
+  margin-bottom: 6px;
+}
+
+.auditx-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.auditx-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.auditx-small {
+  font-size: 11px;
+  opacity: .78;
+}
+
+.auditx-sep {
+  height: 1px;
+  background: rgba(255,255,255,.08);
+  margin: 10px 0;
+}
+
+.auditx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+}
+
+/* Status badge no topo */
+#auditx-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(0, 162, 255, .14);
+  border: 1px solid rgba(0, 162, 255, .22);
+  color: #bfe9ff;
+}
+
+.auditx-green { color: #b7f7c9; border-color: rgba(0,255,140,.20); background: rgba(0,255,140,.08); }
+.auditx-yellow { color: #ffe3a6; border-color: rgba(255,190,0,.22); background: rgba(255,190,0,.10); }
+.auditx-red { color: #ffb3b3; border-color: rgba(255,70,70,.22); background: rgba(255,70,70,.10); }
+
+/* Collapsible sections */
+.auditx-section {
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+}
+
+.auditx-section > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 0;
+}
+
+.auditx-section > summary::-webkit-details-marker { display: none; }
+
+.auditx-summary-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  opacity: .85;
+  font-size: 11px;
+}
+
+/* Source badges */
+.src-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: 8px;
+}
+
+.src-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  opacity: .95;
+}
+
+.src-current { color: #b7f7c9; border-color: rgba(0,255,140,.20); background: rgba(0,255,140,.08); }
+.src-deep    { color: #d9b6ff; border-color: rgba(168, 85, 247, .35); background: rgba(168, 85, 247, .15); } /* ROXO: sub-páginas */
+.src-whois   { color: #bfe9ff; border-color: rgba(0, 162, 255, .30); background: rgba(0, 162, 255, .12); }
+
+/* Tooltip do ? */
+.auditx-help {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  font-size: 12px;
+  cursor: default;
+}
+
+.auditx-help:hover .auditx-tooltip { display: block; }
+
+.auditx-tooltip {
+  display: none;
+  position: absolute;
+  top: 22px;
+  right: 0;
+  width: 260px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: #0c0d10;
+  box-shadow: 0 10px 25px rgba(0,0,0,.5);
+  font-size: 11px;
+  line-height: 1.35;
+  z-index: 2147483647;
+}
+
+/* Redes sociais */
+.auditx-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.auditx-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.auditx-social-btn:hover { background: rgba(255,255,255,.10); }
+
+.auditx-social-btn img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.auditx-social-box {
+  margin-top: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  padding: 10px;
+}
+
+.auditx-link {
+  color: #9ad7ff;
+  word-break: break-word;
+}
+/* Checkbox estilizado + linha clicável */
+.auditx-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.auditx-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+}
+
+.auditx-item:hover {
+  background: rgba(255,255,255,.05);
+}
+
+.auditx-item-left {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  min-width: 0;
+  flex: 1;
+}
+
+.auditx-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  cursor: pointer;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.auditx-checkbox:checked {
+  border-color: rgba(0,255,140,.35);
+  background: rgba(0,255,140,.14);
+}
+
+.auditx-checkbox:checked::after {
+  content: "✓";
+  font-size: 12px;
+  line-height: 1;
+  color: #b7f7c9;
+  font-weight: 800;
+}
+
+.auditx-value {
+  font-size: 12px;
+  line-height: 1.25;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.auditx-copybar {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.auditx-copybtn {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: #e9e9ea;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.auditx-copybtn:hover { background: rgba(255,255,255,.10); }
+
+.auditx-toast {
+  font-size: 11px;
+  opacity: .85;
+  margin-top: 8px;
+}
+/* Master checkbox (mesmo tamanho do ?) */
+/* Master toggle (mesmo tamanho do ?) */
+.auditx-master {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.85);
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+  line-height: 1;
+  transition: background .12s ease, border-color .12s ease, transform .06s ease;
+}
+
+.auditx-master:hover {
+  background: rgba(255,255,255,.08);
+}
+
+.auditx-master:active {
+  transform: translateY(0.5px);
+}
+
+.auditx-master.on {
+  border-color: rgba(0,255,140,.35);
+  background: rgba(0,255,140,.14);
+  color: #b7f7c9;
+  font-weight: 900;
+}
+
+.auditx-master.mid {
+  border-color: rgba(255,190,0,.28);
+  background: rgba(255,190,0,.12);
+  color: #ffe3a6;
+  font-weight: 900;
+}
+
+.auditx-master:focus-visible {
+  outline: 2px solid rgba(255,255,255,.18);
+  outline-offset: 2px;
+}
+
+
+
+
